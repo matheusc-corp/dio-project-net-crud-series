@@ -1,6 +1,9 @@
 ﻿using Series;
+using Series.Classes;
 
-Serie serie = new Serie();
+Menu menu = new Menu();
+
+menu.AbrirMenu();
 
 
 
