@@ -26,16 +26,21 @@ namespace Series
         {
             string retorno = "";
 
-            retorno += $"Genero + {Genero}\n" +
+            retorno += $"Genero: {Genero}\n" +
             $"Titulo: {Titulo}\n" +
             $"Descricao: {Descricao}\n" +
-            $"Ano: {Ano}\n";
+            $"Ano: {Ano}\n" +
+            $"Excluido: {Excluido}";
 
             return retorno;
         }
 
         public string RetornaTitulo(){
             return Titulo;
+        }
+
+        public bool RetornaExcluido(){
+            return Excluido;
         }
 
         public int RetornaId(){
