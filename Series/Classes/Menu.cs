@@ -44,15 +44,15 @@ namespace Series.Classes
                         break;
 
                     case "3":
-                        AtualizarSerie();
+                        // AtualizarSerie();
                         break;
 
                     case "4":
-                        ExcluirSerie();
+                        // ExcluirSerie();
                         break;
 
                     case "5":
-                        VisualizarSerie();
+                        // VisualizarSerie();
                         break;
 
                     case "C":
@@ -62,7 +62,36 @@ namespace Series.Classes
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
+                opcaoUsuario = ObterOpcaoUsuario();
             }
+
+            System.Console.WriteLine("Obrigado por utilizar nosso seviço");
+            Console.ReadLine();
+        }
+
+        private void InserirSerie()
+        {
+            System.Console.WriteLine("Inserir nova serie");
+
+            foreach(int i in Enum.GetValues(typeof(Genero))){
+                System.Console.WriteLine("{0} - {1}", i, Enum.GetName(typeof(Genero), i));
+            }
+
+            System.Console.Write("Digite o genero entre as opcoes acima: ");
+            int entradaGenero = int.Parse(Console.ReadLine());
+
+            Console.Write("Digite o titulo da serie: ");
+            string entradaTitulo = Console.ReadLine();
+
+            System.Console.Write("Digite o ano de inicio da serie: ");
+            int entradaAno = int.Parse(Console.ReadLine());
+
+            System.Console.Write("Digite a descricao da serie: ");
+            string entradaDescricao = Console.ReadLine();
+
+            Serie novaSerie = new Serie(repositorio.ProximoId(), (Genero)entradaGenero, entradaTitulo, entradaDescricao, entradaAno);
+
+            repositorio.Insere(novaSerie);
         }
 
         private void ListarSeries()
@@ -77,10 +106,8 @@ namespace Series.Classes
             }
             
             foreach(var serie in lista){
-                System.Console.WriteLine("#ID {0}: - {1}", serie.RetornaId, serie.RetornaTitulo);
+                System.Console.WriteLine("#ID {0}: - {1}", serie.RetornaId(), serie.RetornaTitulo());
             }
-
-
         }
     }
 }
