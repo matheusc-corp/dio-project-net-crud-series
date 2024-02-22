@@ -7,10 +7,10 @@ namespace Series.Interfaces
 {
     public interface IRepositorio<T>
     {
-        List<T> Lista();
+        List<T> Listar();
         T RetornarPorId(int id);
         void Insere(T entidade);
-        void Exclui(int id);
+        void Excluir(int id);
         void Atualizar(int id, T entidade);
         int ProximoId();
 
