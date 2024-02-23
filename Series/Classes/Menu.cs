@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Series.Interfaces;
 
@@ -76,6 +77,11 @@ namespace Series.Classes
 
             var serie = repositorio.RetornarPorId(indiceSerie);
 
+            if(serie == null){
+                System.Console.WriteLine("Serie não encontrada pelo id informado.");
+                return;
+            }
+
             System.Console.WriteLine(serie);
         }
 
@@ -84,16 +90,29 @@ namespace Series.Classes
             Console.Write("Digite o id da serie: ");
             int indiceSerie = int.Parse(Console.ReadLine());
 
-            repositorio.Excluir(indiceSerie);
+            var serie = repositorio.RetornarPorId(indiceSerie);
+
+            if(serie == null){
+                System.Console.WriteLine("Serie não encontrada pelo id informado.");
+                return;
+            }
+
+            repositorio.Excluir(serie.Id);
         }
 
         private void AtualizarSerie()
         {
-
             System.Console.Write("Digite o id da serie: ");
             int indiceSerie = int.Parse(Console.ReadLine());
 
-            System.Console.WriteLine("Inserir nova serie");
+            var serie = repositorio.RetornarPorId(indiceSerie);
+
+            if(serie == null){
+                System.Console.WriteLine("Serie não encontrada pelo id informado.");
+                return;
+            }
+
+            System.Console.WriteLine("Atualizar serie");
 
             foreach(int i in Enum.GetValues(typeof(Genero))){
                 System.Console.WriteLine("{0} - {1}", i, Enum.GetName(typeof(Genero), i));
@@ -111,7 +130,7 @@ namespace Series.Classes
             System.Console.Write("Digite a descricao da serie: ");
             string entradaDescricao = Console.ReadLine();
 
-            Serie serie = new Serie(indiceSerie, (Genero)entradaGenero, entradaTitulo, entradaDescricao, entradaAno);
+            serie = new Serie(indiceSerie, (Genero)entradaGenero, entradaTitulo, entradaDescricao, entradaAno);
 
             repositorio.Atualizar(indiceSerie, serie);
         }
