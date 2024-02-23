@@ -37,7 +37,16 @@ namespace Series
 
         public Serie RetornarPorId(int id)
         {
-            return listaSerie[id];
+            Serie serie = null;
+
+            try{
+                serie = listaSerie[id];
+                return serie;
+            }
+            catch(ArgumentOutOfRangeException ex){
+            }
+
+            return serie;
         }
     }
 }
